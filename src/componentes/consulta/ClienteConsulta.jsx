@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ClienteConsultaView from "./ClienteConsultaView";
-import "./ClienteConsultaStyles.css";
 
 function ClienteConsulta({ atualizarConsulta }) {
   const [clientes, setClientes] = useState(null);
@@ -14,7 +13,6 @@ function ClienteConsulta({ atualizarConsulta }) {
       setError(null);
       try {
         const response = await fetch(
-          //"https://cli-back-da94521f4063.herokuapp.com/api/v1/clientes/all"
           "http://localhost:8081/api/v1/clientes/all"
         );
         if (!response.ok) {
