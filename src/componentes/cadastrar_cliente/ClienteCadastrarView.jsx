@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import ClienteCadastrar from "./ClienteCadastrar";
-import "./ClienteCadastrarStyles.css"; // Importando o CSS
-const ClienteCadastrarView = () => {
+import "./ClienteCadastrarStyles.css";
+
+const ClienteCadastrarView = ({ onCancelar }) => {
+  // Recebe a prop onCancelar
   const [nome, setNome] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [cpf, setCpf] = useState("");
   const [cep, setCep] = useState("");
   const [email, setEmail] = useState("");
+
   const handleSubmit = async (e) => {
     const clienteData = {
       cpf,
@@ -32,12 +35,14 @@ const ClienteCadastrarView = () => {
       setMensagem(`Erro não esperado cadastrar view: ${error.message}`);
     }
   };
+
   return (
     <div className="cliente-cadastrar-view">
-      <h3>Cadastrar Cliente</h3>
+      <div className="title-cadastrar-view">Gerenciamento de Clientes</div>
+
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="cpf">CPF:</label>
+          <label htmlFor="cpf"> CPF: </label>
           <input
             id="cpf"
             type="text"
@@ -76,13 +81,18 @@ const ClienteCadastrarView = () => {
             required
           />
         </div>
-        <button type="submit" className="button">
-          Confirmar
-        </button>
+        <div className="button-container1">
+          <button type="submit" className="button">
+            Confirmar
+          </button>
+          <button type="button" className="button" onClick={onCancelar}>
+            Cancelar
+          </button>
+        </div>
       </form>
-      {/* Label para mostrar a mensagem com data-testid */}
       {mensagem && <p data-testid="mensagem">{mensagem}</p>}
     </div>
   );
 };
+
 export default ClienteCadastrarView;
